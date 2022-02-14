@@ -1,2 +1,5 @@
 # SomeCoolShit
-Let's do some cool shit Bruh
+Ok allora...
+Robby --> Creazione funzioni per modificare il record dei conti bancari
+Lucca --> Creazione funzioni per movimenti conti bancari
+Fabbio --> Parte principale
