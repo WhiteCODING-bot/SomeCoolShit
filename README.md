@@ -1,5 +1,5 @@
 # SomeCoolShit
 Ok allora...
-Robby --> Creazione funzioni per modificare il record dei conti bancari
-Lucca --> Creazione funzioni per movimenti conti bancari
-Fabbio --> Parte principale
+Robby --> Creazione funzioni per modificare il record dei conti bancari\n
+Lucca --> Creazione funzioni per movimenti conti bancari\n
+Fabbio --> Parte principale\n
