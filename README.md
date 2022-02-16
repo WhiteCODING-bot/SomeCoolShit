@@ -1,5 +1,4 @@
 # SomeCoolShit
-Ok allora...
-Robby --> Creazione funzioni per modificare il record dei conti bancari\n
-Lucca --> Creazione funzioni per movimenti conti bancari\n
-Fabbio --> Parte principale\n
+1. Finire di implementare funzioni mancanti
+   - Implementazione da CSV a stringa
+     - operazione di aggiunta o sottrazione
