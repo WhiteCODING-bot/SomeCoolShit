@@ -15,10 +15,16 @@ int main(int argc, char**argv){
         printf("Error in file open");
         return -2;
     }
-    
-
-
-
-
+    char* id = "random";
+    Account* persona = crea(id,100);
+    showAccount(*persona);
+    distruggi(persona);
     return 0;
 }
+
+/*
+--> ricevere id e conto corrente da CSV
+-->      
+-->
+-->
+*/
