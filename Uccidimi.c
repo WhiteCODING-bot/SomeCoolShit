@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <FILEROBY.h>
+#include "FunzioniBanca.h"
 
 
 int main(int argc, char**argv){
@@ -15,10 +15,10 @@ int main(int argc, char**argv){
         printf("Error in file open");
         return -2;
     }
-
-
-
-
     
+
+
+
+
     return 0;
 }
