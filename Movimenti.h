@@ -5,19 +5,17 @@
 #include <string.h>
 #define DIM 1024
 
-typedef struct {
-    int Id;
-    int Saldo;
-    char* Data;
+typedef struct{
+    int id;
+    int soldi;
 }Movimento;
+
 
 int getId (Movimento);
 int getSaldo (Movimento);
-char* getData (Movimento);
 void setId (Movimento*, int);
 void setSaldo (Movimento*, int);
-void setData (Movimento*, char*);
-Movimento* creaMovimento(int, int, char*);
+Movimento* creaMovimento(int, int);
 Movimento* creaMovimentoDefault ();
 Movimento* creaPCcopia(Movimento);
 void showMovimento(Movimento);
@@ -26,59 +24,46 @@ void disposerMovimento(Movimento*);
 //int RandomId();
 
 int getId (Movimento e){
-    return e.Id;
+    return e.id;
 }
 int getSaldo (Movimento e){
-    return e.Saldo;
-}
-char* getData (Movimento e){
-    return strdup(e.Data);
+    return e.soldi;
 }
 
-void setId (Movimento* e, int Id){
-    e->Id = Id;
+void setId (Movimento* e, int id){
+    e->id = id;
 }
-void setSaldo (Movimento* e, int Saldo){
-    e->Saldo = Saldo;
-}
-void setData (Movimento* e, char* Data){
-    if(e->Data != NULL) free(e -> Data);
-    e -> Data = strdup(Data);
+void setSaldo (Movimento* e, int soldi){
+    e->soldi = soldi;
 }
 
-Movimento* creaMovimento(int Id, int Saldo, char* Data){
+
+Movimento* creaMovimento(int Id, int Saldo){
     Movimento* e = (Movimento*)malloc(sizeof(Movimento));
-    e -> Id = Id;
-    e -> Saldo = Saldo;
-    e -> Data = strdup(Data);
+    e -> id = Id;
+    e -> soldi = Saldo;
     return e;
 }
 
 Movimento* creaMovimentoDefault(){
-    return creaMovimento(0, 0, NULL);
+    return creaMovimento(0, 0);
 }
 
 Movimento* creaMovimentocopia(Movimento e){
-    int Id_tmp = e.Id;
-    int Saldo_tmp = e.Saldo;
-    char* Data_tmp = strdup(e.Data);
+    int Id_tmp = e.id;
+    int Saldo_tmp = e.soldi;
 
-    Movimento* e2 = creaMovimento(Id_tmp, Saldo_tmp, Data_tmp);
-    free(Data_tmp);
+    Movimento* e2 = creaMovimento(Id_tmp, Saldo_tmp);
     return e2;
 }
 
 void disposerMovimento(Movimento* e){
-    if(e->Data) free(e->Data);
     free(e);
 }
 
 void showMovimento(Movimento e){
     printf ("\nId: %d\n", getId(e));
     printf ("\nSaldo: %d\n", getSaldo(e));
-    char* tmp = getData(e);
-    printf("Saldo: %s\n", tmp);
-    free(tmp);
 }
 
 /*

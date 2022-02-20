@@ -2,15 +2,17 @@
 #define __FILE_H__
 
 #include "FunzioniBanca.h"
-#include "Movimenti.h"
+
 
 #define MAX 2048
 #define SEPARATORE ';'
 
+
+
 char* readline(FILE*);
 char** split(char*);
 char** duplicatore(char**);
-Movimento* loadAcc(FILE* fp);
+Movimento* loadAcc(FILE*, Movimento);
 void distruggiVettStringhe(char**);
 
 char* readline(FILE* fp) {
@@ -47,14 +49,13 @@ char** duplicatore(char** vettstr)
     return ret;
 }
 
-Movimento* loadAcc(FILE* fp)
-{
+Movimento* loadAcc(FILE* fp,Movimento m){
     //LEGGERE CSV
     char* stringa = readline(fp);
     char** vett_stringhe = split(stringa);
 
-    char* id = getID(Movimento);
-    int soldi = getSoldi(Movimento);
+    int id = getID(m);
+    int soldi = getSoldi(m);
 
     Movimento* acc = crea(id,soldi);
    

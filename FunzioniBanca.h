@@ -1,95 +1,83 @@
-#ifndef __ACCOUNT_H__
-#define __ACCOUNT_H__
+#ifndef __Movimento_H__
+#define __Movimento_H__
 #define DIM 1024
 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Movimenti.h"
 
 
-typedef struct{
-    char* id;
-    int soldi;
-}Account;
 
-char* getID(Account);
-int getSoldi(Account);
+int getID(Movimento);
+int getSoldi(Movimento);
 
-void setID(Account*, char*);
-void setSoldi(Account*, int);
+void setID(Movimento*, int);
+void setSoldi(Movimento*, int);
 
-Account* creaDefault();
-Account* crea(char*, int);
-void distruggi(Account*);
-Account* creaCopia(Account e);
+Movimento* creaDefault();
+Movimento* crea(int, int);
+void distruggi(Movimento*);
+Movimento* creaCopia(Movimento e);
 
-void showAccount(Account e);
-char* recordToString(Account);
-void stringToFile(Account, FILE*);
+char* recordToString(Movimento);
+void stringToFile(Movimento, FILE*);
 
 
 
 
-char* getID(Account e)
+int getID(Movimento e)
 {
     return e.id;
 }
 
-int getSoldi(Account e)
+int getSoldi(Movimento e)
 {
     return e.soldi;
 }
 
-void setID(Account* e, char* id)
+void setID(Movimento* e, int id)
 {
     e->id=id;
 }
 
-void setSoldi(Account* e, int soldi)
+void setSoldi(Movimento* e, int soldi)
 {
     e->soldi=soldi;
 }
 
-Account* creaDefault()
+Movimento* creaDefault()
 {
-    return crea(NULL,0);
+    return crea(0,0);
 }
 
-Account* crea(char* id, int soldi)
+Movimento* crea(int id, int soldi)
 {  
-    Account* e = (Account*)malloc(sizeof(Account));
+    Movimento* e = (Movimento*)malloc(sizeof(Movimento));
     e->id=id;
     e->soldi=soldi;
     return e;
 }
 
-void showAccount(Account e)
-{
-    printf("---Account---\n");
-    printf("id: %s\n", getID(e));
-    printf("soldi: %d\n", getSoldi(e));
-}
-
-void distruggi(Account* e)
+void distruggi(Movimento* e)
 {
     free(e);
 }
 
-Account* creacopia(Account e){
+Movimento* creacopia(Movimento e){
     return crea(getID(e),getSoldi(e));
 }
 
-char* recordToString(Account e){
+char* recordToString(Movimento e){
     char buffer[DIM];
-    char* id_tmp = getID(e);
+    int id_tmp = getID(e);
     int soldi_tmp = getSoldi(e);
     sprintf(buffer, "%c;%c;%c,%c,%d", id_tmp,soldi_tmp);
-    free(id_tmp);
     return strdup(buffer);    
 }
 
-void stringToFile(Account e, FILE* fp){
+void stringToFile(Movimento e, FILE* fp){
     char* tmp = recordToString(e);
     fprintf(fp, "%s\n", tmp);
     free(tmp);
