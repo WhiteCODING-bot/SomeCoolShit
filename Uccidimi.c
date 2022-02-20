@@ -4,7 +4,8 @@
 #include "FromCsvToRecord.h"
 
 
-int main(int argc, char**argv){
+
+int main(int argc, char**argv,Movimento e){
     if(argc!=3){
         printf("USAGE: #FILE_BASE #FILE_MOD");
         return -1;
@@ -15,9 +16,15 @@ int main(int argc, char**argv){
         printf("Errore apertura di File_Base o File_Modificatore\n\ncontrollare se i file sono esitenti");
         return -2;
     }
-    Account* persona = crea("ID",100);
-    showAccount(*persona);
-    distruggi(persona);
+
+    int id = getId(e);
+    int soldi = getSoldi(e);
+    Movimento* mov = creaDefault();
+    mov = creaMovimento(id,soldi);
+    showMovimento(*mov);
+    distruggi(mov);
+    fclose(fpb);
+    fclose(fpm);
     return 0;
 }
 

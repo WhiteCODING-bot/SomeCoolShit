@@ -29,6 +29,7 @@ int getId (Movimento e){
 int getSaldo (Movimento e){
     return e.soldi;
 }
+    //Fatto da Fabio Luca Stanciu
 
 void setId (Movimento* e, int id){
     e->id = id;

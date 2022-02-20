@@ -1,3 +1,4 @@
+    //Fatto da Fabio Luca Stanciu
 #ifndef __FILE_H__
 #define __FILE_H__
 
@@ -71,7 +72,8 @@ void distruggiVettStringhe(char** vett_stringhe)
     {
         free(*vett_stringhe);
     }
-
+    //Fatto da Fabio Luca Stanciu
     free(tmp);
 }
+
 #endif // __FILE_H__

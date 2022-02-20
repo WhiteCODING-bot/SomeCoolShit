@@ -1,3 +1,4 @@
+    //Fatto da Fabio Luca Stanciu
 #ifndef __Movimento_H__
 #define __Movimento_H__
 #define DIM 1024
@@ -65,6 +66,7 @@ void distruggi(Movimento* e)
     free(e);
 }
 
+    //Fatto da Fabio Luca Stanciu
 Movimento* creacopia(Movimento e){
     return crea(getID(e),getSoldi(e));
 }
