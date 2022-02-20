@@ -1,7 +1,6 @@
 #ifndef __ACCOUNT_H__
 #define __ACCOUNT_H__
 #define DIM 1024
-#define MAX 2048
 
 
 #include <stdio.h>
@@ -29,8 +28,6 @@ void showAccount(Account e);
 char* recordToString(Account);
 void stringToFile(Account, FILE*);
 
-char** split(char* line, char separatore);
-char** duplicatore(char** v);
 
 
 
@@ -98,24 +95,6 @@ void stringToFile(Account e, FILE* fp){
     free(tmp);
 }
 
-char** split(char* line, char separatore){ //Molto spesso le split alterano la stringa originale
-	char* buffer[MAX+1];
-	char sep[] = {separatore,'\0'};
-	buffer[0] = strtok(line, sep);
-	for(int i=1;buffer[i] = strtok(NULL,sep);i++){	}
-	return duplicatore(buffer);
-	//Funzione strtok ==> modifica la stringa di partenza e ci mette un tappo
-	//strtok(line, sep) --> la prima sottostringa
-	//strtok(NULL, sep) --> le successive
-}
-
-char** duplicatore(char** v){
-	int len;
-	for(len=0;*(v+len);len++){ } //Prima conta
-	char** ret = (char**) malloc(sizeof(char*)*(len+1)); //Poi alloca
-	for(char** tmp=ret;*ret=*v;v++,tmp++){ } //Duplica il vettore non il contenuto
-	return ret;
-}
 
 
 #endif
