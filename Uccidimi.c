@@ -5,7 +5,7 @@
 
 
 
-int main(int argc, char**argv,Movimento e){
+int main(int argc, char**argv,Account a,Movimento m){
     if(argc!=3){
         printf("USAGE: #FILE_BASE #FILE_MOD");
         return -1;
@@ -17,12 +17,14 @@ int main(int argc, char**argv,Movimento e){
         return -2;
     }
 
-    int id = getId(e);
-    int soldi = getSoldi(e);
-    Movimento* mov = creaDefault();
-    mov = creaMovimento(id,soldi);
+    //Account* acc = loadAcc(fpb);
+    Movimento* mov = loadMov(fpm);
+    //printf("Account");
+    //showAccount(*acc);
+    printf("Movimento");
     showMovimento(*mov);
-    distruggi(mov);
+    disposerMovimento(mov);
+    //DisposerAccount(acc);
     fclose(fpb);
     fclose(fpm);
     return 0;

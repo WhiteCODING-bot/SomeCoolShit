@@ -1,90 +1,89 @@
-    //Fatto da Fabio Luca Stanciu
-#ifndef __Movimento_H__
-#define __Movimento_H__
+#ifndef __ACCOUNT_H__
+#define __ACCOUNT_H__
 #define DIM 1024
 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Movimenti.h"
 
 
+typedef struct{
+    int IdA;
+    int Soldi;
+    char* Nominativo;
+}Account;
 
-int getID(Movimento);
-int getSoldi(Movimento);
+int getIdA(Account);
+int getSoldi(Account);
+char* getNominativo(Account e);
+void setID(Account*, int);
+void setSoldi(Account*, int);
+void setNominativo(Account* e, char* Nominativo);
+Account* creaAccountDefault();
+Account* creaAccount(int, int, char*);
+void DisposerAccount(Account*);
+Account* creacopiaAccount(Account e);
+char* AccountToString(Account);
+void stringAToFile(Account, FILE*);
 
-void setID(Movimento*, int);
-void setSoldi(Movimento*, int);
-
-Movimento* creaDefault();
-Movimento* crea(int, int);
-void distruggi(Movimento*);
-Movimento* creaCopia(Movimento e);
-
-char* recordToString(Movimento);
-void stringToFile(Movimento, FILE*);
-
-
-
-
-int getID(Movimento e)
-{
-    return e.id;
+int getIdA(Account e){
+    return e.IdA;
 }
 
-int getSoldi(Movimento e)
-{
-    return e.soldi;
+int getSoldi(Account e){
+    return e.Soldi;
 }
 
-void setID(Movimento* e, int id)
-{
-    e->id=id;
+char* getNominativo(Account e){
+    return strdup(e.Nominativo);
 }
 
-void setSoldi(Movimento* e, int soldi)
-{
-    e->soldi=soldi;
+void setIdA(Account* e, int id){
+    e->IdA=id;
 }
 
-Movimento* creaDefault()
-{
-    return crea(0,0);
+void setSoldi(Account* e, int soldi){
+    e->Soldi=soldi;
 }
 
-Movimento* crea(int id, int soldi)
-{  
-    Movimento* e = (Movimento*)malloc(sizeof(Movimento));
-    e->id=id;
-    e->soldi=soldi;
+void setNominativo(Account* e, char* nominativo){
+    if(e->Nominativo != NULL) free(e -> Nominativo);
+    e -> Nominativo = strdup(nominativo);
+}
+
+Account* creaAccountDefault(){
+    return creaAccount(0,0,NULL);
+}
+
+Account* creaAccount(int id, int soldi, char*nominativo){  
+    Account* e = (Account*)malloc(sizeof(Account));
+    e->IdA = id;
+    e->Soldi = soldi;
+    e->Nominativo = nominativo;
     return e;
 }
 
-void distruggi(Movimento* e)
-{
+void DisposerAccount(Account* e){
     free(e);
 }
 
-    //Fatto da Fabio Luca Stanciu
-Movimento* creacopia(Movimento e){
-    return crea(getID(e),getSoldi(e));
+Account* creacopiaAccount(Account e){
+    return creaAccount(getIdA(e), getSoldi(e), getNominativo(e));
 }
 
-char* recordToString(Movimento e){
+char* AccountToString(Account e){
     char buffer[DIM];
-    int id_tmp = getID(e);
-    int soldi_tmp = getSoldi(e);
-    sprintf(buffer, "%c;%c;%c,%c,%d", id_tmp,soldi_tmp);
+    char* Nominativo_tmp = getNominativo(e);
+    sprintf(buffer, "%d;%d;%s", getIdA(e), getSoldi(e), Nominativo_tmp);
+    free(Nominativo_tmp);
     return strdup(buffer);    
 }
 
-void stringToFile(Movimento e, FILE* fp){
-    char* tmp = recordToString(e);
+void stringAToFile(Account e, FILE* fp){
+    char* tmp = AccountToString(e);
     fprintf(fp, "%s\n", tmp);
     free(tmp);
 }
 
-
-
-#endif
+#endif //__ACCOUNT_H__

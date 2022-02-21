@@ -3,83 +3,109 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "FunzioniBanca.h"
+
 #define DIM 1024
 
-typedef struct{
-    int id;
-    int soldi;
+typedef struct {
+    int IdM;
+    int Saldo;
+    char* Data;
 }Movimento;
 
-
-int getId (Movimento);
-int getSaldo (Movimento);
-void setId (Movimento*, int);
-void setSaldo (Movimento*, int);
-Movimento* creaMovimento(int, int);
-Movimento* creaMovimentoDefault ();
-Movimento* creaPCcopia(Movimento);
-void showMovimento(Movimento);
+int getIdM(Movimento);
+int getId(Account);
+int getSaldo(Movimento);
+char* getData(Movimento);
+void setIdM(Movimento*, int);
+void setSaldo(Movimento*, int);
+void setData(Movimento*, char*);
+Movimento* creaMovimento(int, int, char*);
+Movimento* creaMovimentoDefault();
+Movimento* creaMovimentocopia(Movimento);
 void disposerMovimento(Movimento*);
-//int RandomN();
-//int RandomId();
+void showMovimento(Movimento);
+char* MovimentoToString(Movimento);
+void stringMToFile(Movimento, FILE*);
 
-int getId (Movimento e){
-    return e.id;
+int getIdM(Movimento e){
+    return e.IdM;
 }
-int getSaldo (Movimento e){
-    return e.soldi;
+int getSaldo(Movimento e){
+    return e.Saldo;
 }
-    //Fatto da Fabio Luca Stanciu
-
-void setId (Movimento* e, int id){
-    e->id = id;
-}
-void setSaldo (Movimento* e, int soldi){
-    e->soldi = soldi;
+char* getData(Movimento e){
+    return strdup(e.Data);
 }
 
+void setIdM(Movimento* e, int IdM){
+    e->IdM = IdM;
+}
+void setSaldo(Movimento* e, int Saldo){
+    e->Saldo = Saldo;
+}
+void setData(Movimento* e, char* Data){
+    if(e->Data != NULL) free(e -> Data);
+    e -> Data = strdup(Data);
+}
 
-Movimento* creaMovimento(int Id, int Saldo){
+Movimento* creaMovimento(int IdM, int Saldo, char* Data){
     Movimento* e = (Movimento*)malloc(sizeof(Movimento));
-    e -> id = Id;
-    e -> soldi = Saldo;
+    e -> IdM = IdM;
+    e -> Saldo = Saldo;
+    e -> Data = strdup(Data);
     return e;
 }
 
 Movimento* creaMovimentoDefault(){
-    return creaMovimento(0, 0);
+    return creaMovimento(0, 0, NULL);
 }
 
 Movimento* creaMovimentocopia(Movimento e){
-    int Id_tmp = e.id;
-    int Saldo_tmp = e.soldi;
+    int IdM_tmp = e.IdM;
+    int Saldo_tmp = e.Saldo;
+    char* Data_tmp = strdup(e.Data);
 
-    Movimento* e2 = creaMovimento(Id_tmp, Saldo_tmp);
+    Movimento* e2 = creaMovimento(IdM_tmp, Saldo_tmp, Data_tmp);
+    free(Data_tmp);
     return e2;
 }
 
 void disposerMovimento(Movimento* e){
+    if(e->Data) free(e->Data);
     free(e);
 }
 
+char* MovimentoToString(Movimento e){
+    char buffer[DIM];
+    char* Data_tmp = getData(e);
+    sprintf(buffer, "%d;%d;%s", getIdM(e), getSaldo(e), Data_tmp);
+    free(Data_tmp);
+    return strdup(buffer);    
+}
+
+void stringMToFile(Movimento e, FILE* fp){
+    char* tmp = MovimentoToString(e);
+    fprintf(fp, "%s\n", tmp);
+    free(tmp);
+}
 void showMovimento(Movimento e){
-    printf ("\nId: %d\n", getId(e));
+    printf ("\nId: %d", getIdM(e));
     printf ("\nSaldo: %d\n", getSaldo(e));
+    printf("\nData: %s",getData(e));
+
 }
 
-/*
-int RandomId(){
-    char ar[6];
-    int i;
-    for(i = 0; i<6;i++){
-        ar[i] = RandomN();
-    }
-    return atoi(ar);
+int getId(Account a){
+    return a.IdA;
 }
 
-int RandomN(){
-    srand(time(NULL));
-    return (rand()%10);
+void showAccount(Account a){
+    printf ("\nId: %d", getId(a));
+    printf ("\nSaldo: %d", getSoldi(a));
+
 }
-*/
+
+
+
 #endif //__MOVIMENTI_BANCARI_H__
