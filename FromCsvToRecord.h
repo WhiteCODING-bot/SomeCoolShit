@@ -51,7 +51,8 @@ Account* loadAcc(FILE* fp){
     char** vett_stringhe = split(stringa);
     int id = atoi(vett_stringhe[0]);
     int soldi = atoi(vett_stringhe[1]);
-    Account* acc = creaAccount(id, soldi, vett_stringhe[2]);
+    char* nominativo = vett_stringhe[2];
+    Account* acc = creaAccount(id, soldi, nominativo);
     distruggiVettStringhe(vett_stringhe);
     return acc;
 }
